@@ -22,7 +22,7 @@ function ConversorMoedas() {
   const [resultadoConversao, setResultadoConversao] = useState('');
   const [exibirMsgErro, setExibirMsgErro] = useState(false);
 
-
+  // mudar string para vazio
   function handleValor(e) {
     setValor(e.target.value.replace(/\D/g, ''));
   }
@@ -48,8 +48,6 @@ function ConversorMoedas() {
         .then(res => {
           const cotacao = obterCotacao(res.data);
           if(cotacao) {
-
-          
           setResultadoConversao(`${valor} ${moedaDe} = ${cotacao} ${moedaPara}`);
           setExibirModal(true);
           setExibirSpinner(false);
@@ -57,7 +55,7 @@ function ConversorMoedas() {
         }else{
           exibirErro();
         }
-        }).catch(err => exibirErro());
+        }).catch(err => exibirErro);
     }
   }
   function obterCotacao(dadosCotacao) {

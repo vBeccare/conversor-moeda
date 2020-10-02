@@ -39,23 +39,26 @@ function ConversorMoedas() {
     setFormValidado(false);
     setExibirModal(false);
   }
-  const converter = (e) => {
+  const converter = async (e) => {
     e.preventDefault();
     setFormValidado(true);
     if(e.currentTarget.checkValidity() === true){
       setExibirSpinner(true);
-      axios.get(FIXER_URL)
-        .then(res => {
-          const cotacao = obterCotacao(res.data);
-          if(cotacao) {
+      try {
+        const res = await axios.get(FIXER_URL);
+        const cotacao = obterCotacao(res.data);
+        if(cotacao) {
           setResultadoConversao(`${valor} ${moedaDe} = ${cotacao} ${moedaPara}`);
           setExibirModal(true);
           setExibirSpinner(false);
           exibirMsgErro(false);
-        }else{
+        } else {
           exibirErro();
         }
-        }).catch(err => exibirErro);
+      } catch(err) {
+        console.error(err)
+        exibirErro()
+      }
     }
   }
   const obterCotacao = (dadosCotacao) => {

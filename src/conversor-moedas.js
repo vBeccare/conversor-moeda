@@ -23,23 +23,23 @@ function ConversorMoedas() {
   const [exibirMsgErro, setExibirMsgErro] = useState(false);
 
   // mudar string para vazio
-  function handleValor(e) {
+  const handleValor = (e) => {
     setValor(e.target.value.replace(/\D/g, ''));
   }
-  function handleMoedaDe(e){
+  const handleMoedaDe = (e) => {
     setMoedaDe(e.target.value);
   }
-  function handleMoedaPara(e){
+  const handleMoedaPara = (e) => {
     setMoedaPara(e.target.value);
   }
-  function handleFecharModal(e){
+  const handleFecharModal = () => {
     setValor('1');
     setMoedaDe('BRL');
     setMoedaPara('USD');
     setFormValidado(false);
     setExibirModal(false);
   }
-  function converter(e){
+  const converter = (e) => {
     e.preventDefault();
     setFormValidado(true);
     if(e.currentTarget.checkValidity() === true){
@@ -58,7 +58,7 @@ function ConversorMoedas() {
         }).catch(err => exibirErro);
     }
   }
-  function obterCotacao(dadosCotacao) {
+  const obterCotacao = (dadosCotacao) => {
     if(!dadosCotacao || dadosCotacao.success !== true){
       return false;
     }
@@ -67,7 +67,7 @@ function ConversorMoedas() {
     const cotacao = (1 / cotacaoDe * cotacaoPara) * valor;
     return cotacao.toFixed(2);
   }
-    function exibirErro() {
+    const exibirErro = () => {
       setExibirMsgErro(true);
       setExibirSpinner(false);
     }
